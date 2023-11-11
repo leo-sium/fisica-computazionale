@@ -62,6 +62,7 @@ int main (int argc, char** argv){
 
     cout << "terzo integrale:" << endl << "metodo monte carlo\t"<< I_mc_3 << endl << "metodo hit or miss\t" << I_hm_3 << endl << "metodo trapezio\t\t" << I_trap_3 << endl;
 
+    //urlo del sium
 
     return 0;
 }
