@@ -1,0 +1,615 @@
+
+
+*******************************************************************************
+Wed Oct 11 12:30:34 2023
+
+
+FIT:    data read from "dati.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(n*log(p))
+fitted parameters initialized with current variable values
+
+
+
+*******************************************************************************
+Wed Oct 11 12:30:51 2023
+
+
+FIT:    data read from "dati.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(p))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  1.27e-01    1.000000e+00
+   1 5.4706447578e+25   0.00e+00  1.27e-02    9.803933e-03
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.00980393       +/- 5.815e+11    (5.931e+15%)
+
+
+*******************************************************************************
+Thu Oct 12 09:01:32 2023
+
+
+FIT:    data read from "dati.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x)= a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 1.0151160252e+42   0.00e+00  1.00e+20    1.000000e+00
+   5 2.8575877451e+10  -3.62e-04  1.00e+18    7.341105e-09
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 2.85759e+10
+rel. change during last iteration : -3.61677e-09
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 16904.4
+variance of residuals (reduced chisquare) = WSSR/ndf   : 2.85759e+08
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 7.3411e-09       +/- 1.678e-17    (2.285e-07%)
+
+
+*******************************************************************************
+Thu Oct 12 09:41:59 2023
+
+
+FIT:    data read from "datid.dat"
+        format = z
+        #datapoints = 201
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) =  a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 6.3685965940e+83   0.00e+00  5.63e+40    1.000000e+00
+   1 1.5607775203e+79  -4.08e+09  5.63e+39    4.950495e-03
+
+The maximum lambda = 1.000000e+20 was exceeded. Fit stopped.
+final sum of squares of residuals : 1.56078e+79
+rel. change during last iteration : -40803
+
+degrees of freedom    (FIT_NDF)                        : 200
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 2.79354e+38
+variance of residuals (reduced chisquare) = WSSR/ndf   : 7.80389e+76
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.0049505        +/- 0.0003501    (7.071%)
+
+
+*******************************************************************************
+Thu Oct 12 10:01:19 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  1.27e-01    1.000000e+00
+   1 5.4706447578e+25   0.00e+00  1.27e-02    9.804367e-03
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.00980437       +/- 5.815e+11    (5.931e+15%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:25 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  1.24e-03    9.804367e-03
+   1 5.4706447578e+25   0.00e+00  1.24e-04    9.656645e-05
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 9.65664e-05      +/- 5.815e+11    (6.021e+17%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:31 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  1.22e-05    9.656645e-05
+   1 5.4706447578e+25   0.00e+00  1.22e-06    1.391935e-06
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.39193e-06      +/- 5.815e+11    (4.177e+19%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:34 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  1.76e-07    1.391935e-06
+   1 5.4706447578e+25   0.00e+00  1.76e-08    4.588512e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.58851e-07      +/- 5.815e+11    (1.267e+20%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:35 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  5.81e-08    4.588512e-07
+   1 5.4706447578e+25   0.00e+00  5.81e-09    4.497033e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.49703e-07      +/- 5.815e+11    (1.293e+20%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:36 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  5.69e-08    4.497033e-07
+   1 5.4706447578e+25   0.00e+00  5.69e-09    4.496136e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.49614e-07      +/- 5.815e+11    (1.293e+20%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:36 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  5.69e-08    4.496136e-07
+   1 5.4706447578e+25   0.00e+00  5.69e-09    4.496127e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.49613e-07      +/- 5.815e+11    (1.293e+20%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:39 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  5.69e-08    4.496127e-07
+   1 5.4706447578e+25   0.00e+00  5.69e-09    4.496127e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.49613e-07      +/- 5.815e+11    (1.293e+20%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:40 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  5.69e-08    4.496127e-07
+   1 5.4706447578e+25   0.00e+00  5.69e-09    4.496127e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.49613e-07      +/- 5.815e+11    (1.293e+20%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:40 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  5.69e-08    4.496127e-07
+   1 5.4706447578e+25   0.00e+00  5.69e-09    4.496127e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.49613e-07      +/- 5.815e+11    (1.293e+20%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:41 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  5.69e-08    4.496127e-07
+   1 5.4706447578e+25   0.00e+00  5.69e-09    4.496127e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.49613e-07      +/- 5.815e+11    (1.293e+20%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:42 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  5.69e-08    4.496127e-07
+   1 5.4706447578e+25   0.00e+00  5.69e-09    4.496127e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.49613e-07      +/- 5.815e+11    (1.293e+20%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:43 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  5.69e-08    4.496127e-07
+   1 5.4706447578e+25   0.00e+00  5.69e-09    4.496127e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.49613e-07      +/- 5.815e+11    (1.293e+20%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:43 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  5.69e-08    4.496127e-07
+   1 5.4706447578e+25   0.00e+00  5.69e-09    4.496127e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.49613e-07      +/- 5.815e+11    (1.293e+20%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:44 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  5.69e-08    4.496127e-07
+   1 5.4706447578e+25   0.00e+00  5.69e-09    4.496127e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.49613e-07      +/- 5.815e+11    (1.293e+20%)
+
+
+*******************************************************************************
+Thu Oct 12 10:02:45 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  5.69e-08    4.496127e-07
+   1 5.4706447578e+25   0.00e+00  5.69e-09    4.496127e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.49613e-07      +/- 5.815e+11    (1.293e+20%)
+
+
+*******************************************************************************
+Thu Oct 12 10:03:38 2023
+
+
+FIT:    data read from "datif.dat"
+        format = z
+        #datapoints = 101
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*exp(x*log(abs(phi)))
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 5.4706447578e+25   0.00e+00  5.69e-08    4.496127e-07
+   1 5.4706447578e+25   0.00e+00  5.69e-09    4.496127e-07
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 5.47064e+25
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 100
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 7.39638e+11
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.47064e+23
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 4.49613e-07      +/- 5.815e+11    (1.293e+20%)
