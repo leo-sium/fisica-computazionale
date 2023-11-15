@@ -27,6 +27,8 @@ plt.plot(x, y_fit_hm, color='blue', label='f')
 
 plt.xlabel('N')
 plt.ylabel('deviazione dal valore vero')
+plt.yscale('log')
+plt.xscale('log')
 plt.legend()
 
 plt.figure()
@@ -39,6 +41,8 @@ plt.plot(x, y_fit_mc, color='blue', label='f')
 
 plt.xlabel('N')
 plt.ylabel('deviazione dal valore vero')
+plt.yscale('log')
+plt.xscale('log')
 plt.legend()
 
 plt.show()

@@ -30,7 +30,7 @@ double f_3(double x){
 
 int main (int argc, char** argv){
 
-    double N = pow(10, 5);
+    double N = pow(10, 6);
 
     double I_1 = 672.19323731283680927664797017826546492574500186733942065874221332;
     double I_2 = 1480.4609508621402842169020454124156183872962099931681274803958396;
@@ -63,7 +63,7 @@ int main (int argc, char** argv){
     vector<double> dev_hm_3;
     vector<double> dev_mc_3;
 
-    for(int i=1000; i<N; i+=1000){
+    for(int i=10000; i<N; i+=10000){
 
         I_hm_1 = abs( hit_or_miss(xmin_1, xmax_1, ymin_1, ymax_1, i, f_1) - I_1);
         I_mc_1 = abs( monte_carlo(xmin_1, xmax_1, i, f_1 ) - I_1);
@@ -90,30 +90,30 @@ int main (int argc, char** argv){
         //cout << "terzo integrale:" << endl << "metodo monte carlo\t"<< I_mc_3 << endl << "metodo hit or miss\t" << I_hm_3 << endl << "metodo trapezio\t\t" << I_trap_3 << endl;
 
     }
-    int j=1000;
+    int j=10000;
     fstream file_1;
     file_1.open("integrale_1.dat", ios_base::out);
     for (int i=0; i< dev_hm_1.size(); i++){
         file_1 << j << "\t" << setprecision(10)<< dev_hm_1[i] << "\t" << setprecision(10) << dev_mc_1[i] << endl;
-        j+=1000;
+        j+=10000;
     }
     file_1.close();
 
-    j=1000;
+    j=10000;
     fstream file_2;
     file_2.open("integrale_2.dat", ios_base::out);
     for (int i=0; i< dev_hm_2.size(); i++){
         file_2 << j << "\t" << setprecision(10)<< dev_hm_2[i] << "\t" << setprecision(10) << dev_mc_2[i] << endl;
-        j+=1000;
+        j+=10000;
     }
     file_2.close();
 
-    j=1000;
+    j=10000;
     fstream file_3;
     file_3.open("integrale_3.dat", ios_base::out);
     for (int i=0; i< dev_hm_3.size(); i++){
         file_3 << j << "\t" << setprecision(10)<< dev_hm_3[i] << "\t" << setprecision(10) << dev_mc_3[i] << endl;
-        j+=1000;
+        j+=10000;
     }
     file_3.close();
 

@@ -12,7 +12,7 @@
 
 using namespace std;
 
-//DA FNIRE IL MONTE CARLO
+//DA FINIRE IL MONTE CARLO
 
 double f_det(vector<double> x){
     int M = x.size();
@@ -56,7 +56,6 @@ void Genera_punti(vector<double>& coord, vector<double>& p, vector<vector<double
         }
         return;
     }
-
     for (int i = 0; i < coord.size(); i++) {
         p[indice] = coord[i];
         Genera_punti(coord, p, punti, k, indice+1);
@@ -70,7 +69,7 @@ int main( int argc, char** argv){
     double xmin = 0.;
     double xmax = 1.;
     double I_det = 0.;
-/*
+
     double h = (xmax-xmin)/(2*N_det);
     vector<vector<double>> punti;
     vector<double> coord;
@@ -88,7 +87,7 @@ int main( int argc, char** argv){
     I_det = I_det*pow(2, M);
 
     cout << I_det << endl;
-*/
+
     int N_mc =  pow(10, 5);
     double I_mc = 0;
     vector<vector<double>> punti_mc;

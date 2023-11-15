@@ -15,7 +15,7 @@ dati2 = np.loadtxt('punti_2.dat')
 dati3 = np.loadtxt('punti_3.dat')
 
 #primo istogramma ---------------------------------------------------------------------------------------
-h_1, bin_egdes_1, _ = plt.hist(dati1, bins='auto', edgecolor='purple', color='purple', density=True)
+h_1, bin_egdes_1, _ = plt.hist(dati1, bins='auto', edgecolor='green', color='green', density=True)
 
 #sezione di creazione della funzione da sovrapporre
 x_1 = np.linspace(min(bin_egdes_1), max(bin_egdes_1), 1000)
@@ -31,7 +31,7 @@ plt.legend()
 
 #secondo istogramma --------------------------------------------------------------------------------------
 plt.figure()
-h_2, bin_egdes_2, _ = plt.hist(dati2, bins='auto', edgecolor='purple', color='purple', density=True)
+h_2, bin_egdes_2, _ = plt.hist(dati2, bins='auto', edgecolor='green', color='green', density=True)
 
 #sezione di creazione della funzione da sovrapporre
 x_2 = np.linspace(min(bin_egdes_2), max(bin_egdes_2), 1000)
@@ -48,7 +48,7 @@ plt.legend()
 
 #terzo istogramma ----------------------------------------------------------------------------------------
 plt.figure()
-h_3, bin_egdes_3, _ = plt.hist(dati3, bins='auto', edgecolor='purple', color='purple', density=True)
+h_3, bin_egdes_3, _ = plt.hist(dati3, bins='auto', edgecolor='green', color='green', density=True)
 
 #sezione di creazione della funzione da sovrapporre
 x_3 = np.linspace(min(bin_egdes_3), max(bin_egdes_3), 1000)
