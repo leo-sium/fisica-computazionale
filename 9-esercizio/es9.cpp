@@ -43,10 +43,11 @@ int main(){
 
     double med_unif = media(punti_unif);
     cout << med_unif << endl;
-    double var_unif = momento(punti_unif, 2);
-    cout << var_unif << endl;
-    double sk_unif = momento(punti_unif, 3);
-    cout << sk_unif << endl;
+    double mom_1_unif = momento(punti_unif, 4)/pow(momento(punti_unif, 2),2);
+    cout << mom_1_unif << endl;
+    double mom_2_unif = momento(punti_unif, 6)/momento(punti_unif, 4);
+    cout << mom_2_unif << endl;
+
     //FACCIO ANCHE SKEWNESS E CURTOSI E VERIFICO LE FORMULE SIANO GUSTE CON PYTHON
 
     for (int i=0; i<N; i++){
@@ -60,10 +61,10 @@ int main(){
 
     double med_mon = media(punti_mon);
     cout << med_mon << endl;
-    double var_mon = momento(punti_mon, 2);
-    cout << var_mon << endl;
-    double sk_mon = momento(punti_unif, 3);
-    cout << sk_mon << endl;
+    double mom_1_mon = momento(punti_mon, 4)/pow(momento(punti_mon, 2),2);
+    cout << mom_1_mon << endl;
+    double mom_2_mon = momento(punti_mon, 6)/momento(punti_mon, 4);
+    cout << mom_2_mon << endl;
 
 
     fstream file;
