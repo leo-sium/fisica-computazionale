@@ -25,7 +25,11 @@ double f_cos_im ( double x){
 }
 
 double f_sin(double x){
+    return x*sin(x);
+}
 
+double f_sin_im(double x){
+    return acos(1-x);
 }
 
 
@@ -36,13 +40,18 @@ int main(){
     double x,y;
     double xmin = 0.;
     double xmax = M_PI/2.;
+    double xmax_s = M_PI;
     vector<double> punti;
 
     double I_mc = monte_carlo(xmin, xmax, N, f_cos);
 
     double I_imp = monte_carlo(0, 1, N, f_cos_im);
 
-    cout << I_mc << "\t" << I_imp << endl;
+    double I2_mc = monte_carlo(xmin, xmax_s, N, f_sin);
+
+    double I2_imp = monte_carlo(0, 2, N, f_sin_im);
+
+    cout << I_mc << "\t" << I_imp << "\t" << I2_mc << "\t" "\t" << I2_imp << endl;
 
 
     return 0;

@@ -31,15 +31,22 @@ double pdf(double x){
 
 }
 
+double inv(double x){
+    if (x<(M_E-1)/(2*sqrt(M_PI))) return rand_range(0, 1.);
+    else return (sqrt(-log(1-(2*x*sqrt(M_PI))/M_E)));
+}
+
 int main() {
 
     srand(time(0));
+
+    vector<double> punti_inv;
+    vector<double> punti_ar;
 
     //----------------------------------------------------------------------------------
     double z = 0.;
     double a = 0.;
     double x = 0.;
-    vector<double> punti_inv;
     int N = pow(10, 6);
     //scrivo bene il motivo di questa generazione e perchè ho calcolato i numeri gaussiani così
     for (int i=0; i<N; i++){
@@ -49,25 +56,18 @@ int main() {
         punti_inv.push_back(x);
     }
     //---------------------------------------------------------------------------------
-// chiedo  bene come funziona il metodo
-    x=0;
-    double y = 0;
-
+   
     for(int i=0; i<N; i++){
-
-        do {
-            x = rand_range(0, 1000);
-            y = rand_range(0, mag(x) )
-        }while (y<)
-
-    }    
-
+        z= rand_range(0., 1.);
+        x= inv(z);
+        punti_ar.push_back(x);
+    }
 
     fstream file;
     file.open("punti.dat", ios_base::out);
 
     for(int i=0; i<punti_inv.size(); i++){
-        file << setprecision(10)<< punti_inv[i] << endl;
+        file << setprecision(10)<< punti_ar[i] << endl;
     }
     file.close();
 
