@@ -21,19 +21,22 @@ double f_inv( double z, double a){
     return x;
 }
 
-double mag(double x){
-    if (x<1) return (1./sqrt(M_PI));
-    else return 1./sqrt(M_PI) * x * exp(1 - x * x);
-}
-
-double pdf(double x){
-    return 1./sqrt(M_PI) * exp( -pow(x,2));
-
-}
-
 double inv(double x){
-    if (x<(M_E-1)/(2*sqrt(M_PI))) return rand_range(0, 1.);
-    else return (sqrt(-log(1-(2*x*sqrt(M_PI))/M_E)));
+    if(x<(2./3.)){
+        return (3./2.)*x;
+    }
+    else{
+        return sqrt(1-log(3.*(1.-x)));
+    }
+}
+
+double f ( double x){
+    return 1./sqrt(M_PI)*exp(-x*x);
+}
+
+double g(double x){
+    if (x<1) return 1./sqrt(M_PI);
+    else return 1./sqrt(M_PI)*x*exp(1-x*x);
 }
 
 int main() {
@@ -47,7 +50,8 @@ int main() {
     double z = 0.;
     double a = 0.;
     double x = 0.;
-    int N = pow(10, 6);
+    double controllo;
+    int N = pow(10, 5);
     //scrivo bene il motivo di questa generazione e perchè ho calcolato i numeri gaussiani così
     for (int i=0; i<N; i++){
         z = rand_range(0, 1.);
@@ -56,11 +60,25 @@ int main() {
         punti_inv.push_back(x);
     }
     //---------------------------------------------------------------------------------
-   
+    //la tengo commentata, questa genera il grafico di g(x), magari mi serve nella relazione 
+    /*
     for(int i=0; i<N; i++){
         z= rand_range(0., 1.);
         x= inv(z);
         punti_ar.push_back(x);
+    }
+    */
+
+    while (punti_ar.size()< N) {
+        z = rand_range(0., 1.);
+        x = inv(z);
+        a = rand_range(0., 1.);
+        controllo = f(x)/g(x);
+        if( a < controllo){
+            x = x*moneta();
+            punti_ar.push_back(x);
+        }
+
     }
 
     fstream file;

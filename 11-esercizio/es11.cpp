@@ -16,7 +16,7 @@ double f_1(double x){
 }
 
 double f_2(double x){
-    return sqrt(-log(0.5-x));
+    return sqrt(-log(1-x));
 }
 
 int main(){

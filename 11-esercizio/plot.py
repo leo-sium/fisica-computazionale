@@ -7,7 +7,7 @@ def f(x) :
     return ris
 
 def g(x) :
-    ris = x*np.exp(-np.power(x, 2))
+    ris = 2*x*np.exp(-np.power(x, 2))
     return ris
 
 dati1 = np.loadtxt('punti_1.dat')
