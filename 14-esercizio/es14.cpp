@@ -14,13 +14,13 @@
 
 using namespace std;
 
-double theta (double th, double z, double h){
-    double ris = th + h*z;
+double f_x (double x, double v, double h){
+    double ris = v;
     return ris;
 }
 
-double zeta ( double th, double z, double h){
-    double ris = z - h*th;
+double f_v ( double x, double v, double h){
+    double ris = -x;
     return ris;
 }
 
@@ -31,10 +31,11 @@ int main (){
     double h = 0.0001;
     double t = 10;
 
-    vector<double> th(2);
-    th[0]= theta0;
-    vector<double> z(2);
-    z[0]=z0;
+    vector<double> x(2);
+    x[0]= theta0;
+    vector<double> v(2);
+    v[0]=z0;
+
 /*
     for (double i=0; i<t; i+=h){
         th[1]=(theta(th[0], z[0], h));
@@ -45,10 +46,19 @@ int main (){
     }
 */
 
-    Eulero2(th, z, h, t, theta, zeta);
+    Eulero2(x, v, h, t, f_x, f_v);
+
+    cout << x[0] << "\t" << v[0] << endl;
+
+    x[0]= theta0;
+    v[0]=z0;
+
+    runge_kutta2_2(x, v, h, t, f_x, f_v);
+
+    cout << x[0] << "\t" << v[0] << endl;
 
 
-    cout << z[0] << "\t" << th[0] << endl;
+
 
 
 
