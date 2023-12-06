@@ -8,80 +8,81 @@
 
 using namespace std;
 
-void Eulero2 (vector<double>& x, vector<double>& v, double h, double t, double f_x(double x, double z), double f_v(double x, double z) ){
+//ragionno molto su i<t o i<=t
+void Eulero_2 (vector<double>& x, vector<double>& v, int N, double t, double f_x(double x, double z), double f_v(double x, double z) ){
 
-    if (x.size() != 2 || v.size() != 2){
-        cerr << "Errore: inserire vector di dimesione esattamente 2" << endl;
-        return;
-    }
+    double h = t/static_cast<double>(N);
 
-    for (double i=0; i<t; i+=h){
-        x[1]= x[0]+ h*(f_x(x[0], v[0]));
-        v[1]=v[0] + h*(f_v(x[0], v[0]));
-        x[0]=x[1];
-        v[0]=v[1];
-        
+    for (int i=0; i<N; i++){
+        x[i+1] = x[i] + h*(f_x(x[i], v[i]));
+        v[i+1] = v[i] + h*(f_v(x[i], v[i]));       
     }
 
     return;
 }
 
-    void runge_kutta2_2 (vector<double>& x, vector<double>& v, double h, double t, double f_x(double x, double z), double f_v(double x, double z)){
+/*
+void Eulero2V2 (vector<double>& x, vector<double>& v, double h, double t, double f_x(double x, double v), double f_v(double x, double v) ){
 
-    if (x.size() != 2 || v.size() != 2){
-        cerr << "Errore: inserire vector di dimesione esattamente 2" << endl;
-        return;
+    if(t!=0){
+        t = t-h;
+        Eulero2V2 (x, v, h, t, f_x, f_v );
     }
 
-    vector<double> kx(2);
-    vector<double> kv(2);
+    x[1] = x + h*(f_x(x, v));
+    v[1] = v + h*(f_v(x, v));
 
-    for (double i=0; i<t; i+=h){
+    x= x[1];
+    v = v[1];
 
-        kx[0] = h*f_x(x[0], v[0]);
-        kv[0] = h*f_v(x[0], v[0]);
+    return;
 
-        kx[1] = h*f_x(x[0]+kx[0]/2., v[0]+kv[0]/2.);
-        kv[1] = h*f_v(x[0]+kx[0]/2., v[0]+kv[0]/2.);
+}
+*/
 
-        x[1] = x[0] + kx[1];
-        v[1] = v[0] + kv[1];
+void runge_kutta2_2 (vector<double>& x, vector<double>& v, int N, double t, double f_x(double x, double v), double f_v(double x, double v)){
 
-        x[0] = x[1];
-        v[0] = v[1];
+    double kx_1, kx_2, kv_1, kv_2;
+
+    double h = t/static_cast<double>(N);
+
+    for (int i=0; i<N; i++){
+
+        kx_1 = h*f_x(x[i], v[i]);
+        kv_1 = h*f_v(x[i], v[i]);
+
+        kx_2 = h*f_x(x[i]+kx_1/2., v[i]+kv_1/2.);
+        kv_2 = h*f_v(x[i]+kx_1/2., v[i]+kv_1/2.);
+
+        x[i+1] = x[i] + kx_2;
+        v[i+1] = v[i] + kv_2;
+
     }
     return;
 }
 
-    void runge_kutta4_2 (vector<double>& x, vector<double>& v, double h, double t, double f_x(double x, double z), double f_v(double x, double z)){
+void runge_kutta4_2 (vector<double>& x, vector<double>& v, int N, double t, double f_x(double x, double v), double f_v(double x, double v)){
 
-            if (x.size() != 2 || v.size() != 2){
-        cerr << "Errore: inserire vector di dimesione esattamente 2" << endl;
-        return;
-    }
+    double h = t/static_cast<double>(N);
 
-    vector<double> kx(4);
-    vector<double> kv(4);
+    double kx_1, kx_2, kx_3, kx_4, kv_1, kv_2, kv_3, kv_4;
 
-    for (double i=0; i<t; i+=h){
+    for (int i=0; i<N; i++){
 
-        kx[0] = h*f_x(x[0], v[0]);
-        kv[0] = h*f_v(x[0], v[0]);
+        kx_1 = h*f_x(x[i], v[i]);
+        kv_1 = h*f_v(x[i], v[i]);
 
-        kx[1] = h*f_x(x[0]+kx[0]/2., v[0]+kv[0]/2.);
-        kv[1] = h*f_v(x[0]+kx[0]/2., v[0]+kv[0]/2.);
+        kx_2 = h*f_x(x[i]+kx_1/2., v[i]+kv_1/2.);
+        kv_2 = h*f_v(x[i]+kx_1/2., v[i]+kv_1/2.);
 
-        kx[2] = h*f_x(x[0]+kx[1]/2., v[0]+kv[1]/2.);
-        kv[2] = h*f_v(x[0]+kx[1]/2., v[0]+kv[1]/2.);
+        kx_3 = h*f_x(x[i]+kx_2/2., v[i]+kv_2/2.);
+        kv_3 = h*f_v(x[i]+kx_2/2., v[i]+kv_2/2.);
 
-        kx[3] = h*f_x(x[0]+kx[2], v[0]+kv[2]);
-        kv[3] = h*f_v(x[0]+kx[2], v[0]+kv[2]);
+        kx_4 = h*f_x(x[i]+kx_3, v[i]+kv_3);
+        kv_4 = h*f_v(x[i]+kx_3, v[i]+kv_3);
 
-        x[1] = x[0] + 1./6.*(kx[0] + 2*kx[1] + 2*kx[2] + kx[3]);
-        v[1] = v[0] + 1./6.*(kv[0] + 2*kv[1] + 2*kv[2] + kv[3]);
-
-        x[0] = x[1];
-        v[0] = v[1];
+        x[i+1] = x[i] + 1./6.*(kx_1 + 2*kx_2 + 2*kx_3 + kx_4);
+        v[i+1] = v[i] + 1./6.*(kv_1 + 2*kv_2 + 2*kv_3 + kv_4);
     }
 
     return;
