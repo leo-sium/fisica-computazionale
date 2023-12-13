@@ -20,7 +20,7 @@ double f_x (double x, double v){
 }
 
 double f_v ( double x, double v){
-    double gamma = 2.;
+    double gamma = 0.1;
     double ris = -sin(x) - gamma*v;
     return ris;
 }
@@ -28,7 +28,7 @@ double f_v ( double x, double v){
 int main (){
     double theta0 = 0;
     double z0 = 1.;
-    double t = 10;
+    double t = 100;
     int N = 100000;
     double h = t/static_cast<double>(N);
 
