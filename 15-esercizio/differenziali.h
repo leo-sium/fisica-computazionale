@@ -91,7 +91,8 @@ void runge_kutta4_2 (vector<double>& x, vector<double>& v, int N, double t, doub
 void Eulero_2_t (vector<double>& x, vector<double>& v, int N, double tmax, double f_x(double x, double z, double t), double f_v(double x, double z, double t) ){
 
     double h = tmax/static_cast<double>(N);
-    double t = 0;
+    //ragiono se parto da t= 0 o t=h
+    double t = h;
 
     for (int i=0; i<N; i++){
         x[i+1] = x[i] + h*(f_x(x[i], v[i], t));
@@ -144,8 +145,8 @@ void runge_kutta2_2_t (vector<double>& x, vector<double>& v, int N, double tmax,
         kx_3 = h*f_x(x[i]+kx_2/2., v[i]+kv_2/2., t + h/2.);
         kv_3 = h*f_v(x[i]+kx_2/2., v[i]+kv_2/2., t + h/2.);
 
-        kx_4 = h*f_x(x[i]+kx_3, v[i]+kv_3, t);
-        kv_4 = h*f_v(x[i]+kx_3, v[i]+kv_3, t);
+        kx_4 = h*f_x(x[i]+kx_3, v[i]+kv_3, t + h);
+        kv_4 = h*f_v(x[i]+kx_3, v[i]+kv_3, t + h);
 
         x[i+1] = x[i] + 1./6.*(kx_1 + 2*kx_2 + 2*kx_3 + kx_4);
         v[i+1] = v[i] + 1./6.*(kv_1 + 2*kv_2 + 2*kv_3 + kv_4);

@@ -9,6 +9,7 @@
 #include <math.h>
 #include "vector"
 
+//QUI E NEI PROSSIMI CAMBIO TIME:H CON CRONO; ED INIZIO A USARE CONSTEXPR E AUTO
 
 using namespace std;
 

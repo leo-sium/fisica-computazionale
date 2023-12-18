@@ -114,8 +114,8 @@ void runge_kutta2_2_t (vector<double>& x, vector<double>& v, int N, double tmax,
         kx_1 = h*f_x(x[i], v[i], t);
         kv_1 = h*f_v(x[i], v[i], t);
 
-        kx_2 = h*f_x(x[i]+kx_1/2., v[i]+kv_1/2., t);
-        kv_2 = h*f_v(x[i]+kx_1/2., v[i]+kv_1/2., t);
+        kx_2 = h*f_x(x[i]+kx_1/2., v[i]+kv_1/2., t + h/2.);
+        kv_2 = h*f_v(x[i]+kx_1/2., v[i]+kv_1/2., t + h/2.);
 
         x[i+1] = x[i] + kx_2;
         v[i+1] = v[i] + kv_2;
@@ -138,14 +138,14 @@ void runge_kutta2_2_t (vector<double>& x, vector<double>& v, int N, double tmax,
         kx_1 = h*f_x(x[i], v[i], t);
         kv_1 = h*f_v(x[i], v[i], t);
 
-        kx_2 = h*f_x(x[i]+kx_1/2., v[i]+kv_1/2., t);
-        kv_2 = h*f_v(x[i]+kx_1/2., v[i]+kv_1/2., t);
+        kx_2 = h*f_x(x[i]+kx_1/2., v[i]+kv_1/2., t + h/2.);
+        kv_2 = h*f_v(x[i]+kx_1/2., v[i]+kv_1/2., t + h/2.);
 
-        kx_3 = h*f_x(x[i]+kx_2/2., v[i]+kv_2/2., t);
-        kv_3 = h*f_v(x[i]+kx_2/2., v[i]+kv_2/2., t);
+        kx_3 = h*f_x(x[i]+kx_2/2., v[i]+kv_2/2., t + h/2.);
+        kv_3 = h*f_v(x[i]+kx_2/2., v[i]+kv_2/2., t + h/2.);
 
-        kx_4 = h*f_x(x[i]+kx_3, v[i]+kv_3, t);
-        kv_4 = h*f_v(x[i]+kx_3, v[i]+kv_3, t);
+        kx_4 = h*f_x(x[i]+kx_3, v[i]+kv_3, t + h);
+        kv_4 = h*f_v(x[i]+kx_3, v[i]+kv_3, t + h);
 
         x[i+1] = x[i] + 1./6.*(kx_1 + 2*kx_2 + 2*kx_3 + kx_4);
         v[i+1] = v[i] + 1./6.*(kv_1 + 2*kv_2 + 2*kv_3 + kv_4);

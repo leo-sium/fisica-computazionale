@@ -29,8 +29,8 @@ double f_v ( double x, double v, double t){
 int main (){
     double theta0 = 0;
     double z0 = 1.;
-    double t = 100;
-    int N = 100000;
+    double t = 250;
+    int N = 1000000;
     double h = t/static_cast<double>(N);
 
     vector<double> x_eulero (N);
