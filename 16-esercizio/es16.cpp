@@ -3,13 +3,10 @@
 #include "iomanip"
 #include "cmath"
 #include "differenziali.h"
-#include "string.h"
 #include <cmath>
-#include <cstdlib>
 #include <fstream>
 #include <math.h>
 #include <ostream>
-#include "time.h"
 #include "vector"
 
 using namespace std;
