@@ -1,9 +1,6 @@
 #include "iostream"
-#include "fstream"
-#include "iomanip"
 #include "cmath"
 #include "integrali.h"
-#include "string.h"
 #include <cmath>
 #include <cstdlib>
 #include <math.h>

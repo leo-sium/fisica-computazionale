@@ -1,5 +1,4 @@
 #include "iostream"
-#include "cmath"
 #include <cmath>
 #include <math.h>
 #include <ostream>
@@ -30,17 +29,18 @@ int main (int argc, char**argv){
 
     double xmin = -2;
     double xmax = 2.;
-    double precisione = 0.0001;
+    double precisione1 = 0.01;
+    double precisione2 = 0.000001;
 
     vector<vector<double>> intervalli = bracketing(xmin, xmax, g);
 
-    if(trova_segno(xmin, xmax)== 1 &&  intervalli.size()==1){
+    if(trova_segno(f(xmin), f(xmax))== 1 &&  intervalli.size()==1){
         cout << "non ci sono zeri nell'intervallo" << endl;
         return 0;
     }
 
-    vector<double> zeri_bi = bisezione (intervalli, precisione, g);
-    vector<double> zeri_newton = Newton(intervalli, precisione, g, g_der);
+    vector<double> zeri_bi = bisezione (intervalli, precisione1, g);
+    vector<double> zeri_newton = Newton(intervalli, precisione2,g, g_der);
 
     for (int i=0; i<intervalli.size(); ++i){
         cout << "intervallo " << i+1 << ": \t"<< intervalli[i][0] << "\t" << intervalli[i][1] << endl;
@@ -51,8 +51,8 @@ int main (int argc, char**argv){
     }
 
     cout << "con il metodo di Newton-Raphson:" << endl;
-    for (int i=0; i< zeri_bi.size(); ++i){
-        cout << "lo zero " << i+1 << " è: " << zeri_bi[i] << endl;
+    for (int i=0; i< zeri_newton.size(); ++i){
+        cout << "lo zero " << i+1 << " è: " << zeri_newton[i] << endl;
     }
     return 0;
 }

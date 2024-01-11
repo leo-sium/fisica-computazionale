@@ -20,7 +20,7 @@ double f_v ( double x, double v, double t){
 
     double A = 0.5;
     double B = 0.5;
-    double gamma = 0.003;
+    double gamma = 0.03;
     double ris = - gamma*v -( A - B*cos(t))*sin(x);
     return ris;
 }

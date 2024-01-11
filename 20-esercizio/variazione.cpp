@@ -1,0 +1,56 @@
+#include "iostream"
+#include <cmath>
+#include <math.h>
+#include <ostream>
+#include <iomanip>
+#include <fstream>
+#include <vector>
+#include <complex>
+
+using namespace std;
+
+complex<double> f(complex<double> z){
+    complex<double> uno (1., 0.); //sinceramente non credo sia il modo migliore, ne cerco un'altro
+    return z - (pow(z,3)-uno)/(3.*pow(z,2));
+}
+
+int main(int argc, char**argv){
+
+    int N = 1000;
+    int K = 50;
+    complex<double> zero1 (1, 0);
+    complex<double> zero2 (polar(1., 2*M_PI/3));
+    complex<double> zero3 (polar(1., -2*M_PI/3));
+    double mod1, mod2, mod3;
+
+    double h = 4./static_cast<double>(N-1);
+    complex<double> punto(-2, -2);
+    vector<complex<double>> griglia;
+    vector<int> valore_zero (pow(N,2));
+
+    for (int i=0; i<N; ++i){
+        griglia.push_back(punto);
+        for (int j=0; j<N-1; ++j){
+            punto.imag(punto.imag()+h);
+            griglia.push_back(punto);
+        }
+        punto.imag(-2);
+        punto.real(punto.real()+h);
+    }
+
+    for(int i=0; i<griglia.size(); ++i){
+
+        for(int j=0; j<K; ++j){
+            punto= f(punto);
+        }
+        mod1 = abs(punto-zero1);
+        mod2 = abs(punto - zero2);
+        mod3 = abs(punto - mod3);
+
+        if ( min(min(mod1, mod2), mod3)== mod1) valore_zero[i] = 1;
+        else if( min(min(mod1, mod2), mod3)== mod2) valore_zero[i] = 2;
+        else if( min(min(mod1, mod2), mod3)== mod3) valore_zero[i] = 3;
+        else valore_zero[i] = 0;
+
+    }
+}
