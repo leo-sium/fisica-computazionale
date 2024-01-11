@@ -16,12 +16,12 @@ complex<double> f(complex<double> z){
 
 int main(int argc, char**argv){
 
-    int N = 1000;
-    int K = 50;
+    int N = 5;
+    int K = 30;
     complex<double> zero1 (1, 0);
     complex<double> zero2 (polar(1., 2*M_PI/3));
     complex<double> zero3 (polar(1., -2*M_PI/3));
-    double mod1, mod2, mod3;
+    double mod1, mod2, mod3, minimo;
 
     double h = 4./static_cast<double>(N-1);
     complex<double> punto(-2, -2);
@@ -45,12 +45,25 @@ int main(int argc, char**argv){
         }
         mod1 = abs(punto-zero1);
         mod2 = abs(punto - zero2);
-        mod3 = abs(punto - mod3);
+        mod3 = abs(punto - zero3);
 
-        if ( min(min(mod1, mod2), mod3)== mod1) valore_zero[i] = 1;
-        else if( min(min(mod1, mod2), mod3)== mod2) valore_zero[i] = 2;
-        else if( min(min(mod1, mod2), mod3)== mod3) valore_zero[i] = 3;
+        cout << mod1 << "\t" << mod2 << "\t" << mod3 << endl;
+
+        minimo = min(min(mod1,mod2), mod3);
+        cout << minimo << endl;
+        
+
+        if ( minimo== mod1) valore_zero[i] = 1;
+        else if( minimo== mod2) valore_zero[i] = 2;
+        else if( minimo== mod3) valore_zero[i] = 3;
         else valore_zero[i] = 0;
-
     }
+    fstream file;
+    file.open("punti_var.dat", ios_base::out);
+    for (int i=0; i<griglia.size(); i++){
+        file << setprecision(12) << griglia[i].real() << "\t" << griglia[i].imag() << "\t" << valore_zero[i] << endl;
+    }
+    file.close();
+
+    return 0;
 }
