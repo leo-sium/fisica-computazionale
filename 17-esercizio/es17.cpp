@@ -12,58 +12,40 @@
 #include "time.h"
 #include "vector"
 
+#define n 3
+
 using namespace std;
 
-double f_x (double x, double y, double z){
-    return  -10*(x-z);
+double f_x ( vector<double>& x, double t){
+    return -10*(x[0]-x[1]); 
 }
 
-double f_y ( double x, double y, double z){
-    return  -x*z + 28*x -y;
+double f_v (vector<double>& x, double t){
+    return -x[0]*x[2] + 28*x[0] - x[1];
 }
 
-double f_z (double x, double y, double z){
-    return x*y - (8./3.)*z;
+double f_z (vector<double>& x, double  t){
+    return x[0]*x[1] - (8./3.)*x[2];
 }
 
 int main (){
-    double x0 = 0;
-    double y0 = 0;
-    double z0 = 1;
+
+    vector<double> iniziali (n);
+
+    iniziali[0] = 1.;
+    iniziali[1] = 1.;
+    iniziali[2] = 1.;
     double t = 100;
     int N = 100000;
-    double h = t/static_cast<double>(N);
 
-    vector<vector<double>> eulero (N, vector<double> (3, 0.0));
-    eulero[0][0] = x0;
-    eulero[1][0] = y0;
-    eulero[2][0] = z0;
+    double (*f[n]) (vector<double>&, double) = {f_x, f_v, f_z};
 
-    vector<vector<double>> rk2 (N, vector<double> (3, 0.0));
-    rk2[0][0] = x0;
-    rk2[1][0] = y0;
-    rk2[2][0] = z0;
-
-    vector<vector<double>> rk4 (N, vector<double> (3, 0.0));
-    rk4[0][0] = x0;
-    rk4[1][0] = y0;
-    rk4[2][0] = z0;
+    eulero(iniziali, t, N, f);
+    runge_kutta_2(iniziali,  t, N, f);
+    runge_kutta_4(iniziali, t, N, f);
 
 
-    Eulero(eulero, N, t, f_x, f_y, f_z);
 
-    runge_kutta2(rk2, N, t, f_x, f_y, f_z);
-
-    runge_kutta4(rk4, N,  t, f_x, f_y, f_z);
-
-    fstream file;
-    file.open("punti_1.dat", ios_base::out);
-
-    for (int i=0; i<N; i++){
-        file<< setprecision(100) << static_cast<double>(i)*h << "\t" << eulero[0][i] << "\t" << eulero[1][i] << "\t" << eulero[2][i] <<"\t" << rk2[0][i] << "\t" << rk2[1][i]<< "\t" << rk2[2][i] << rk4[0][i] << "\t" << rk4[1][i] << "\t" << rk4[2][i] << endl;
-    }
-    file.close();
 
     return 0;
-
 }

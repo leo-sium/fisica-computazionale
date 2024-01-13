@@ -17,7 +17,7 @@
 using namespace std;
 
 double f_x ( vector<double>& x, double t){
-    return -10*(x[0]-x[2]); 
+    return -10*(x[0]-x[1]); 
 }
 
 double f_v (vector<double>& x, double t){
@@ -25,15 +25,15 @@ double f_v (vector<double>& x, double t){
 }
 
 double f_z (vector<double>& x, double  t){
-    return x[0]*x[1] - (8./3.)*x[3];
+    return x[0]*x[1] - (8./3.)*x[2];
 }
 
 int main (){
 
     vector<double> iniziali (n);
 
-    iniziali[0] = 0.;
-    iniziali[1] = 0.;
+    iniziali[0] = 1.;
+    iniziali[1] = 1.;
     iniziali[2] = 1.;
     double t = 100;
     int N = 100000;

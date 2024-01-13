@@ -5,87 +5,137 @@
 #include "math.h"
 #include "iostream"
 #include "vector"
+#include "fstream"
+#include "iomanip"
+#include <cstdlib>
 
 using namespace std;
 
-//ragionno molto su i<t o i<=t
-void Eulero (vector<vector<double>>& punti, int N, double t, double f_x(double x, double y, double z), double f_y(double x, double y, double z), double f_z(double x, double y, double z) ){
+vector<double> somma_vettori(vector<double>& v1, vector<double>& v2){
 
-    double h = t/static_cast<double>(N);
-
-    for (int i=0; i<N; i++){
-        punti[0][i+1] = punti[0][i] + h*(f_x(punti[0][i], punti[1][i], punti[2][i]));
-        punti[1][i+1] = punti[1][i] + h*(f_y(punti[0][i], punti[1][i], punti[2][i]));       
+    if(v1.size() != v2.size()) {
+        cout << "i vettori hanno dimensione diversa"<< endl;
+        exit(EXIT_FAILURE);
     }
 
-    return;
+    vector<double> v3 (v1.size());
+
+    for(int i=0; i<v1.size(); ++i){
+        v3[i] = v1[i] + v2[i];
+    }
+    return v3;
+} 
+
+vector<double> calcola_k(vector<double>& v1, vector<double>& v2){
+
+    vector<double> temp (v2.size());
+    for (int i=0; i<v2.size(); ++i){
+        temp[i] = v2[i]/2.;
+    }
+    return somma_vettori(v1, temp);
 }
 
+//ragiono sul numero dei passi, che di sicuro così mi fermo probabilmente un passo prima rispetto all'effettivo tempo finale
 
+void eulero( vector<double>& iniziali, double tmax, int N_passi, double (*f[])(vector<double>&, double)){
 
-void runge_kutta2 (vector<vector<double>>& punti, int N, double t, double f_x(double x, double y, double z), double f_y(double x, double y, double z), double f_z(double x, double y, double z) ){
+    double h = tmax/static_cast<double>(N_passi);
+    double t=h;
+    int  n = iniziali.size();
 
-    vector<double> kx (2);
-    vector<double> ky (2);
-    vector<double> kz (2);
+    vector<vector<double>> punti (N_passi, vector<double> (n, 0.0));
 
-
-    double h = t/static_cast<double>(N);
-
-    for (int i=0; i<N; i++){
-
-        kx[0] = h*f_x(punti[0][i], punti[1][i], punti[2][i]);
-        ky[0] = h*f_y(punti[0][i], punti[1][i], punti[2][i]);
-        kz[0] = h*f_z(punti[0][i], punti[1][i], punti[2][i]);
-
-
-        kx[1] = h*f_x(punti[0][i]+kx[0]/2., punti[1][i]+ky[0]/2., punti[2][i]+kz[0]/2.);
-        ky[1] = h*f_y(punti[0][i]+kx[0]/2., punti[1][i]+ky[0]/2., punti[2][i]+kz[0]/2.);
-        ky[1] = h*f_z(punti[0][i]+kx[0]/2., punti[1][i]+ky[0]/2., punti[2][i]+kz[0]/2.);
-
-        punti[0][i+1] = punti[0][i] + kx[1];
-        punti[1][i+1] = punti[1][i] + ky[1];
-        punti[2][i+1] = punti[2][i] + kz[1];
-
+    for(int i=0; i<n; i++){
+        punti[0][i] = iniziali[i];
     }
-    return;
+
+    for (int i=0; i<N_passi-1; ++i){
+        for (int j=0; j<n; ++j){
+            punti[i+1][j] = punti[i][j] + h*(f[j](punti[i], t));
+        }
+        t+=h;
+    }
+
+    fstream file;
+    file.open("punti_eulero.dat", ios_base::out);
+    for(int i=0; i<N_passi; ++i){
+        file<< setprecision(100) << static_cast<double>(i)*h << "\t";
+        for (int j=0; j<n; ++j){
+            file<< setprecision(100) << punti[i][j] << "\t"; 
+        }
+        file<< endl;
+    }
 }
 
-void runge_kutta4 (vector<vector<double>>& punti, int N, double t, double f_x(double x, double y, double z), double f_y(double x, double y, double z), double f_z(double x, double y, double z) ){
+void runge_kutta_2( vector<double>& iniziali, double tmax, int N_passi, double (*f[])(vector<double>&, double)){
 
-    double h = t/static_cast<double>(N);
+    double h = tmax/static_cast<double>(N_passi);
+    double t=h;
+    int  n = iniziali.size();
 
-    vector<double> kx (4);
-    vector<double> ky (4);
-    vector<double> kz (4);
+    vector<vector<double>> punti (N_passi, vector<double> (n, 0.0));
+    vector<vector<double>> k (2, vector<double>(n, 0.0));
+    vector<double> temp(n);
 
-    for (int i=0; i<N; i++){
-
-        kx[0] = h*f_x(punti[0][i], punti[1][i], punti[2][i]);
-        ky[0] = h*f_y(punti[0][i], punti[1][i], punti[2][i]);
-        kz[0] = h*f_z(punti[0][i], punti[1][i], punti[2][i]);
-
-        kx[1] = h*f_x(punti[0][i]+kx[0]/2., punti[1][i]+ky[0]/2., punti[2][i]+kz[0]/2.);
-        ky[1] = h*f_y(punti[0][i]+kx[0]/2., punti[1][i]+ky[0]/2., punti[2][i]+kz[0]/2.);
-        ky[1] = h*f_z(punti[0][i]+kx[0]/2., punti[1][i]+ky[0]/2., punti[2][i]+kz[0]/2.);
-
-
-        kx[2] = h*f_x(punti[0][i]+kx[1]/2., punti[1][i]+ky[1]/2., punti[2][i]+kz[1]/2.);
-        ky[2] = h*f_y(punti[0][i]+kx[1]/2., punti[1][i]+ky[1]/2., punti[2][i]+kz[1]/2.);
-        ky[2] = h*f_z(punti[0][i]+kx[1]/2., punti[1][i]+ky[1]/2., punti[2][i]+kz[1]/2.);
-
-
-        kx[3] = h*f_x(punti[0][i]+kx[2], punti[1][i]+ky[2], punti[2][i]+kz[3]);
-        ky[3] = h*f_y(punti[0][i]+kx[2], punti[1][i]+ky[2], punti[2][i]+kz[3]);
-        ky[3] = h*f_z(punti[0][i]+kx[2], punti[1][i]+ky[2], punti[2][i]+kz[3]);
-
-
-        punti[0][i+1] = punti[0][i] + 1./6.*(kx[0] + 2*kx[1] + 2*kx[2] + kx[3]);
-        punti[1][i+1] = punti[1][i] + 1./6.*(ky[0] + 2*ky[1] + 2*ky[2] + ky[3]);
-        punti[2][i+1] = punti[2][i] + 1./6.*(kz[0] + 2*kz[1] + 2*kz[2] + ky[3]);
+    for(int i=0; i<n; i++){
+        punti[0][i] = iniziali[i];
     }
 
-    return;
+    for (int i=0; i<N_passi-1; ++i){
+        for (int j=0; j<n; ++j) k[0][j] = h*(f[j])(punti[i],  t);
+        temp = calcola_k(punti[i], k[0]);
+        for (int j=0; j<n; ++j) k[1][j] = h*(f[j])( temp, t+h/2.);
+        for (int j=0; j<n; ++j) punti[i+1][j] = punti[i][j] + k[1][j];
+        t+=h;
+    }
+
+    fstream file;
+    file.open("punti_rk2.dat", ios_base::out);
+    for(int i=0; i<N_passi; ++i){
+        file<< setprecision(100) << static_cast<double>(i)*h << "\t";
+        for (int j=0; j<n; ++j){
+            file<< setprecision(100) << punti[i][j] << "\t"; 
+        }
+        file<< endl;
+    }
+
+}
+
+void runge_kutta_4( vector<double>& iniziali, double tmax, int N_passi, double (*f[])(vector<double>&, double)){
+
+    double h = tmax/static_cast<double>(N_passi);
+    double t=h;
+    int  n = iniziali.size();
+
+    vector<vector<double>> punti (N_passi, vector<double> (n, 0.0));
+    vector<vector<double>> k (4, vector<double>(n, 0.0));
+    vector<double> temp(n);
+
+    for(int i=0; i<n; i++){
+        punti[0][i] = iniziali[i];
+    }
+
+    for (int i=0; i<N_passi-1; ++i){
+
+        for (int j=0; j<n; ++j) k[0][j] = h*(f[j])(punti[i],  t);
+        temp = calcola_k(punti[i], k[0]);
+        for (int j=0; j<n; ++j) k[1][j] = h*(f[j])( temp, t+h/2.);
+        temp = calcola_k(punti[i], k[1]);
+        for (int j=0; j<n; ++j) k[2][j] = h*(f[j])( temp, t+h/2.);
+        temp = somma_vettori(punti[i], k[2]);
+        for (int j=0; j<n; ++j) k[3][j] = h*(f[j])(temp,  t+h);
+        for (int j=0; j<n; ++j) punti[i+1][j] = punti[i][j] + 1./6.*(k[0][j] + 2*k[1][j] + 2*k[2][j] + k[3][j]);
+        t+=h;
+    }
+    fstream file;
+    file.open("punti_rk4.dat", ios_base::out);
+    for(int i=0; i<N_passi; ++i){
+        file<< setprecision(100) << static_cast<double>(i)*h << "\t";
+        for (int j=0; j<n; ++j){
+            file<< setprecision(100) << punti[i][j] << "\t"; 
+        }
+        file<< endl;
+    }
 }
 
 #endif
