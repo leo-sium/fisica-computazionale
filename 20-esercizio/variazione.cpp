@@ -16,7 +16,7 @@ complex<double> f(complex<double> z){
 
 int main(int argc, char**argv){
 
-    int N = 5;
+    int N = 50;
     int K = 30;
     complex<double> zero1 (1, 0);
     complex<double> zero2 (polar(1., 2*M_PI/3));
@@ -40,6 +40,7 @@ int main(int argc, char**argv){
 
     for(int i=0; i<griglia.size(); ++i){
 
+        punto = griglia[i];     
         for(int j=0; j<K; ++j){
             punto= f(punto);
         }
@@ -47,10 +48,8 @@ int main(int argc, char**argv){
         mod2 = abs(punto - zero2);
         mod3 = abs(punto - zero3);
 
-        cout << mod1 << "\t" << mod2 << "\t" << mod3 << endl;
 
         minimo = min(min(mod1,mod2), mod3);
-        cout << minimo << endl;
         
 
         if ( minimo== mod1) valore_zero[i] = 1;
