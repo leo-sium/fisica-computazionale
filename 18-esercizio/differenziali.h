@@ -11,14 +11,72 @@
 
 using namespace std;
 
-vector<double> somma_vettori(vector<double>& v1, vector<double>& v2){
+class vettore {
+private:
+    double x, y, z;
+
+public:
+    // Costruttore per inizializzare un vettore con le sue tre componenti
+    vettore(double x_val, double y_val, double z_val) : x(x_val), y(y_val), z(z_val) {}
+
+    vettore() : x(0), y(0), z(0) {}
+
+    // Funzione per calcolare il modulo del vettore
+    double modulo() const {
+        return std::sqrt(x * x + y * y + z * z);
+    }
+
+    double X(){
+        return x;
+    }
+    double Y(){
+        return y;
+    }
+    double Z(){
+        return x;
+    }
+
+    // Operazione di somma tra vettori
+    vettore operator+(const vettore& other) const {
+        return vettore(x + other.x, y + other.y, z + other.z);
+    }
+
+    // Operazione di sottrazione tra vettori
+    vettore operator-(const vettore& other) const {
+        return vettore(x - other.x, y - other.y, z - other.z);
+    }
+
+    // Operazione di moltiplicazione per uno scalare
+    vettore operator*(double scalare) const {
+        return vettore(x * scalare, y * scalare, z * scalare);
+    }
+
+    // Operazione di divisione per uno scalare
+    vettore operator/(double scalare) const {
+        // Verifica se lo scalare è diverso da zero prima di eseguire la divisione
+        if (scalare != 0.0) {
+            return vettore(x / scalare, y / scalare, z / scalare);
+        } else {
+            std::cerr << "Errore: divisione per zero" << std::endl;
+            // In caso di divisione per zero, restituisci un vettore nullo
+            return vettore(0.0, 0.0, 0.0);
+        }
+    }
+
+    // Funzione per stampare le componenti del vettore
+    void print() const {
+        std::cout << "(" << x << ", " << y << ", " << z << ")";
+    }
+};
+
+vector<vettore> somma_vector(vector<vettore>& v1, vector<vettore>& v2){
 
     if(v1.size() != v2.size()) {
         cout << "i vettori hanno dimensione diversa"<< endl;
         exit(EXIT_FAILURE);
     }
 
-    vector<double> v3 (v1.size());
+    vector<vettore> v3 (v1.size());
 
     for(int i=0; i<v1.size(); ++i){
         v3[i] = v1[i] + v2[i];
@@ -26,116 +84,87 @@ vector<double> somma_vettori(vector<double>& v1, vector<double>& v2){
     return v3;
 } 
 
-vector<double> calcola_k(vector<double>& v1, vector<double>& v2){
+vector<vettore> calcola_k(vector<vettore>& v1, vector<vettore>& v2){
 
-    vector<double> temp (v2.size());
+    vector<vettore> temp (v2.size());
     for (int i=0; i<v2.size(); ++i){
         temp[i] = v2[i]/2.;
     }
-    return somma_vettori(v1, temp);
+    return somma_vector(v1 , temp);
 }
 
 //ragiono sul numero dei passi, che di sicuro così mi fermo probabilmente un passo prima rispetto all'effettivo tempo finale
 
-void eulero( vector<double>& iniziali, double tmax, int N_passi, double (*f[])(vector<double>&, double)){
+
+void runge_kutta_4 ( vector<vettore>& r_iniziale, vector<vettore>& v_iniziale, double tmax, int N_passi, vettore (*f[])(vector<vettore>&)){
 
     double h = tmax/static_cast<double>(N_passi);
     double t=h;
-    int  n = iniziali.size();
+    int  n = r_iniziale.size();
 
-    vector<vector<double>> punti (N_passi, vector<double> (n, 0.0));
+    vector<vector<vettore>> r (N_passi, vector<vettore>(n) );
+    vector<vector<vettore>> v (N_passi, vector<vettore>(n) );
 
-    for(int i=0; i<n; i++){
-        punti[0][i] = iniziali[i];
-    }
+    vector<vector<vettore>> k_r (4, vector<vettore>(n));
+    vector<vector<vettore>> k_v (4, vector<vettore>(n));
+    vector<vettore> temp_r(n);
+    vector<vettore> temp_v(n);
 
-    for (int i=0; i<N_passi-1; ++i){
-        for (int j=0; j<n; ++j){
-            punti[i+1][j] = punti[i][j] + h*(f[j](punti[i], t));
-        }
-        t+=h;
-    }
 
-    fstream file;
-    file.open("punti_eulero.dat", ios_base::out);
-    for(int i=0; i<N_passi; ++i){
-        file<< setprecision(100) << static_cast<double>(i)*h << "\t";
-        for (int j=0; j<n; ++j){
-            file<< setprecision(100) << punti[i][j] << "\t"; 
-        }
-        file<< endl;
-    }
-}
-
-void runge_kutta_2( vector<double>& iniziali, double tmax, int N_passi, double (*f[])(vector<double>&, double)){
-
-    double h = tmax/static_cast<double>(N_passi);
-    double t=h;
-    int  n = iniziali.size();
-
-    vector<vector<double>> punti (N_passi, vector<double> (n, 0.0));
-    vector<vector<double>> k (2, vector<double>(n, 0.0));
-    vector<double> temp(n);
 
     for(int i=0; i<n; i++){
-        punti[0][i] = iniziali[i];
-    }
-
-    for (int i=0; i<N_passi-1; ++i){
-        for (int j=0; j<n; ++j) k[0][j] = h*(f[j])(punti[i],  t);
-        temp = calcola_k(punti[i], k[0]);
-        for (int j=0; j<n; ++j) k[1][j] = h*(f[j])( temp, t+h/2.);
-        for (int j=0; j<n; ++j) punti[i+1][j] = punti[i][j] + k[1][j];
-        t+=h;
-    }
-
-    fstream file;
-    file.open("punti_rk2.dat", ios_base::out);
-    for(int i=0; i<N_passi; ++i){
-        file<< setprecision(100) << static_cast<double>(i)*h << "\t";
-        for (int j=0; j<n; ++j){
-            file<< setprecision(100) << punti[i][j] << "\t"; 
-        }
-        file<< endl;
-    }
-
-}
-
-void runge_kutta_4( vector<double>& iniziali, double tmax, int N_passi, double (*f[])(vector<double>&, double)){
-
-    double h = tmax/static_cast<double>(N_passi);
-    double t=h;
-    int  n = iniziali.size();
-
-    vector<vector<double>> punti (N_passi, vector<double> (n, 0.0));
-    vector<vector<double>> k (4, vector<double>(n, 0.0));
-    vector<double> temp(n);
-
-    for(int i=0; i<n; i++){
-        punti[0][i] = iniziali[i];
+        r[0][i] = r_iniziale[i];
+        v[0][i] = v_iniziale[i];
     }
 
     for (int i=0; i<N_passi-1; ++i){
 
-        for (int j=0; j<n; ++j) k[0][j] = h*(f[j])(punti[i],  t);
-        temp = calcola_k(punti[i], k[0]);
-        for (int j=0; j<n; ++j) k[1][j] = h*(f[j])( temp, t+h/2.);
-        temp = calcola_k(punti[i], k[1]);
-        for (int j=0; j<n; ++j) k[2][j] = h*(f[j])( temp, t+h/2.);
-        temp = somma_vettori(punti[i], k[2]);
-        for (int j=0; j<n; ++j) k[3][j] = h*(f[j])(temp,  t+h);
-        for (int j=0; j<n; ++j) punti[i+1][j] = punti[i][j] + 1./6.*(k[0][j] + 2*k[1][j] + 2*k[2][j] + k[3][j]);
+        for (int j=0; j<n; ++j) {
+            k_r[0][j] = (f[j])(v[i])*h;
+            k_v[0][j] = (f[j+3])(r[i])*h;
+        }
+        temp_r = calcola_k(r[i], k_r[0]);
+        temp_v = calcola_k(v[i], k_r[0]);
+
+        for (int j=0; j<n; ++j){
+            k_r[1][j] = (f[j])(temp_v)*h;
+            k_v[1][j] = (f[j+3])(temp_r)*h;
+        } 
+
+        temp_r = calcola_k(r[i], k_r[1]);
+        temp_v = calcola_k(v[i], k_r[1]);
+
+        for (int j=0; j<n; ++j) {
+            k_r[2][j] = (f[j])(temp_v)*h;
+            k_v[2][j] = (f[j+3])(temp_r)*h;
+        }
+
+        temp_r = calcola_k(r[i], k_r[2]);
+        temp_v = calcola_k(v[i], k_r[2]);
+
+        for (int j=0; j<n; ++j){
+            k_r[3][j] = (f[j])(temp_v)*h;
+            k_v[3][j] = (f[j+3])(temp_r)*h;
+        }
+        for (int j=0; j<n; ++j) {
+            r[i+1][j] = r[i][j] + (k_r[0][j] + k_r[1][j]*2 + k_r[2][j]*2 + k_r[3][j])/6.;
+            v[i+1][j] = v[i][j] + (k_v[0][j] + k_v[1][j]*2 + k_v[2][j]*2 + k_v[3][j])/6.;
+
+        }
         t+=h;
     }
+    //SISTEMO LE PRECISIONI
     fstream file;
     file.open("punti_rk4.dat", ios_base::out);
     for(int i=0; i<N_passi; ++i){
-        file<< setprecision(100) << static_cast<double>(i)*h << "\t";
+        file<< setprecision(3) << static_cast<double>(i)*h << "\t";
         for (int j=0; j<n; ++j){
-            file<< setprecision(100) << punti[i][j] << "\t"; 
+            file<< setprecision(3) << r[i][j].X() << " " << r[i][j].Y()<< " " << r[i][j].Z()<< "\t"; 
         }
         file<< endl;
     }
 }
+
+
 
 #endif
