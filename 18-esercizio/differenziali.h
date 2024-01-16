@@ -96,7 +96,7 @@ vector<vettore> calcola_k(vector<vettore>& v1, vector<vettore>& v2){
 //ragiono sul numero dei passi, che di sicuro così mi fermo probabilmente un passo prima rispetto all'effettivo tempo finale
 
 
-void runge_kutta_4 ( vector<vettore>& r_iniziale, vector<vettore>& v_iniziale, double tmax, int N_passi, vettore (*f[])(vector<vettore>&)){
+vector<vector<vector<vettore>>> runge_kutta_4 ( vector<vettore>& r_iniziale, vector<vettore>& v_iniziale, double tmax, int N_passi, vettore (*f[])(vector<vettore>&)){
 
     double h = tmax/static_cast<double>(N_passi);
     double t=h;
@@ -104,13 +104,14 @@ void runge_kutta_4 ( vector<vettore>& r_iniziale, vector<vettore>& v_iniziale, d
 
     vector<vector<vettore>> r (N_passi, vector<vettore>(n) );
     vector<vector<vettore>> v (N_passi, vector<vettore>(n) );
+    vector<vector<vector<vettore>>> risultati;
 
     vector<vector<vettore>> k_r (4, vector<vettore>(n));
     vector<vector<vettore>> k_v (4, vector<vettore>(n));
     vector<vettore> temp_r(n);
     vector<vettore> temp_v(n);
 
-
+// calcolo dell'evoluzione temporale---------------------------
 
     for(int i=0; i<n; i++){
         r[0][i] = r_iniziale[i];
@@ -153,16 +154,25 @@ void runge_kutta_4 ( vector<vettore>& r_iniziale, vector<vettore>& v_iniziale, d
         }
         t+=h;
     }
+
+    //stampa su file delle coordinate per l'animazione----------------------
     //SISTEMO LE PRECISIONI
     fstream file;
-    file.open("punti_rk4.dat", ios_base::out);
-    for(int i=0; i<N_passi; ++i){
+    file.open("animazione.dat", ios_base::out);
+    for(int i=0; i<N_passi; i+=1000){
         file<< setprecision(3) << static_cast<double>(i)*h << "\t";
         for (int j=0; j<n; ++j){
             file<< setprecision(3) << r[i][j].X() << " " << r[i][j].Y()<< " " << r[i][j].Z()<< "\t"; 
         }
         file<< endl;
     }
+    file.close();
+
+    risultati.push_back(r);
+    risultati.push_back(v);
+
+    return risultati;
+
 }
 
 
