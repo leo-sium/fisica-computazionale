@@ -41,7 +41,7 @@ vector<vector<double>> bracketing (double xmin, double xmax, double f(double)){
     return intervalli;
 }
 
-
+// aggiungo un controllo sul fatto che uno dei due estremi sia uno 0;
 vector<double> bisezione ( vector<vector<double>>& intervalli, double precision, double f(double)){
 
     vector<double> zeri;
@@ -51,7 +51,7 @@ vector<double> bisezione ( vector<vector<double>>& intervalli, double precision,
         xave = intervalli[i][0];
         xmin = intervalli[i][0];
         xmax = intervalli[i][1];
-
+//vedo se questa precisione va bene
         while ((xmax - xmin) > precision){
             xave = 0.5 * (xmax + xmin);
             if (f(xave) * f(xmin) > 0.) xmin = xave ;

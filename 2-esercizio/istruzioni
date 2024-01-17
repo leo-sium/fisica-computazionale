@@ -1,4 +1,0 @@
-phi = -(sqrt(5)+1)/2
-f(x) =  a*exp(x*log(abs(phi)))
-fit f(x) "dati.dat" via a
-plot "dati.dat", f(x)

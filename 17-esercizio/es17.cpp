@@ -30,11 +30,13 @@ double f_z (vector<double>& x, double  t){
 
 int main (){
 
+//faccio come studio due rk4 con condizioni iniziali poco differenti che dovranno divergere molto
+
     vector<double> iniziali (n);
 
-    iniziali[0] = 1.;
-    iniziali[1] = 1.;
-    iniziali[2] = 1.;
+    iniziali[0] = 1.1;
+    iniziali[1] = 1.1;
+    iniziali[2] = 1.1;
     double t = 100;
     int N = 100000;
 
@@ -43,9 +45,6 @@ int main (){
     eulero(iniziali, t, N, f);
     runge_kutta_2(iniziali,  t, N, f);
     runge_kutta_4(iniziali, t, N, f);
-
-
-
 
     return 0;
 }

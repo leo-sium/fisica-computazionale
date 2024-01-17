@@ -3,22 +3,19 @@
 #include "iomanip"
 #include "cmath"
 #include "differenziali.h"
-#include "string.h"
 #include <cmath>
-#include <cstdlib>
 #include <fstream>
 #include <math.h>
-#include <ostream>
 #include "vector"
-
-#define n 6
-
-
 // sto usando una pessima gestione della memoria, vedo di migliorare, magari usando le reference/alias
+
+#define n 6 //dimensione del sistema di equazioni differenziali 
+
 using namespace std;
 
-vector<double> m {1.6, 0.3, 0.3};
+vector<double> m {0.3, 0.3, 0.3}; // vettore che contiene le masse dei corpi
 
+//Dichiaro le funzioni vettoriali di aggiornamento delle posizioni e delle velocità dei corpi
 
 vettore f_r1 (vector<vettore>& v){
     return v[0];
@@ -52,56 +49,52 @@ vettore f_v3(vector<vettore>& r){
 
 int main (){
 
+//condizioni iniziali del problema-------------------------------------------
     vettore r1(1, 0, 0);
     vettore r2(-1, 0, 0);
     vettore r3(0, 0, 0);
 
-    vettore v1(0, 0.4, 0.);
-    vettore v2(0, -0.8, 0.7);
-    vettore v3(0, -0.8, -0.7);
+    vettore v1(0, 0.15, -0.15);
+    vettore v2(0, -0.15, 0.15);
+    vettore v3(0, 0, 0);
 
     vector<vettore> r_iniziale{r1, r2, r3};
     vector<vettore> v_iniziale{v1, v2, v3};
     vector<vector<vettore>> r, v;
-    
-    double temp = 0;
-
-    double t = 100;
-    int N = 1000000;
-    double h = t/static_cast<double>(N);
     double r12, r13, r23;
 
+    double tmax = 100; //il tempo finale di calcolo dell'equazione differenziale
+    int N_passi = 1000000; //numero di passi in cui suddivido l'intervallo di tempo
+    double h = tmax/static_cast<double>(N_passi);
 
-    vector<double> K(N);
-    vector<double> U(N);
-    vector<double> E(N);
+    vector<double> K(N_passi);
+    vector<double> U(N_passi);
+    vector<double> E(N_passi);
 
-
-    double G = 6.67*pow(10, -11 );
+    double G = 1;
 
     vettore (*f[n]) (vector<vettore>&) = {f_r1, f_r2, f_r3, f_v1, f_v2, f_v3};
     
-    vector<vector<vector<vettore>>> risultati = runge_kutta_4(r_iniziale, v_iniziale, t, N, f);
+//la seguente funzione restituisce un vettore che ha per componenti le posizioni di tutti i corpi ad ogni istante e le corrispondenti velocità
+    vector<vector<vector<vettore>>> risultati = runge_kutta_4(r_iniziale, v_iniziale, tmax, N_passi, f);
 
     r = risultati[0];
     v = risultati[1];
- 
-
-    for (int i=0; i< N; ++i){
+// calcolo l'energia cinetica del sistema----------------------------------------
+    for (int i=0; i< N_passi; ++i){
         for(int j=0; j<3; ++j){
            K[i] += pow(v[i][j].modulo(), 2)*(m[j]/2.);
         }
+// Calcolo l'energia potenziale del sistema-----------------------------------------
 //trovo un modo di farlo più elegante
-
         r12 = (r[i][0] - r[i][1]).modulo();
-
         U[i] = -(G*m[0]*m[1]/(r[i][1]-r[i][0]).modulo() + G*m[0]*m[2]/(r[i][2]-r[i][0]).modulo() + G*m[2]*m[1]/(r[i][1]-r[i][2]).modulo());
         E[i] = U[i]+K[i];
     }
-
+//Stampo su file i tempi e le corrispondenti energie -------------------------------
     fstream file;
     file.open("energia.dat", ios_base::out);
-    for(int i=0; i<N; ++i){
+    for(int i=0; i<N_passi; ++i){
         file<< setprecision(6) << static_cast<double>(i)*h << "\t";
         file<< setprecision(6) << K[i] << "\t" << U[i] << "\t" << E[i] << endl;
     }

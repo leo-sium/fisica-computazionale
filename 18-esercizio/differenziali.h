@@ -19,6 +19,7 @@ public:
     // Costruttore per inizializzare un vettore con le sue tre componenti
     vettore(double x_val, double y_val, double z_val) : x(x_val), y(y_val), z(z_val) {}
 
+    // Costruttore che inizializza ogni componente a 0
     vettore() : x(0), y(0), z(0) {}
 
     // Funzione per calcolare il modulo del vettore
@@ -26,6 +27,7 @@ public:
         return std::sqrt(x * x + y * y + z * z);
     }
 
+    // funzioni che restituiscono le singole componenti del vettore
     double X(){
         return x;
     }
@@ -36,29 +38,29 @@ public:
         return x;
     }
 
-    // Operazione di somma tra vettori
+    // Operatore di somma tra vettori
     vettore operator+(const vettore& other) const {
         return vettore(x + other.x, y + other.y, z + other.z);
     }
 
-    // Operazione di sottrazione tra vettori
+    // Operatore di sottrazione tra vettori
     vettore operator-(const vettore& other) const {
         return vettore(x - other.x, y - other.y, z - other.z);
     }
 
-    // Operazione di moltiplicazione per uno scalare
+    // Operatore di moltiplicazione per uno scalare
     vettore operator*(double scalare) const {
         return vettore(x * scalare, y * scalare, z * scalare);
     }
 
-    // Operazione di divisione per uno scalare
+    // Operatore di divisione per uno scalare
     vettore operator/(double scalare) const {
         // Verifica se lo scalare è diverso da zero prima di eseguire la divisione
         if (scalare != 0.0) {
             return vettore(x / scalare, y / scalare, z / scalare);
         } else {
             std::cerr << "Errore: divisione per zero" << std::endl;
-            // In caso di divisione per zero, restituisci un vettore nullo
+            // In caso di divisione per zero, restituisce un vettore nullo
             return vettore(0.0, 0.0, 0.0);
         }
     }
@@ -69,6 +71,7 @@ public:
     }
 };
 
+//funzione che somma due vector di vettori componente per componente
 vector<vettore> somma_vector(vector<vettore>& v1, vector<vettore>& v2){
 
     if(v1.size() != v2.size()) {
@@ -83,7 +86,7 @@ vector<vettore> somma_vector(vector<vettore>& v1, vector<vettore>& v2){
     }
     return v3;
 } 
-
+//funzione che semplifica il calcolo dell'argomento nei calcoli delle k intermedie in runge-kutta 4-------------------------------
 vector<vettore> calcola_k(vector<vettore>& v1, vector<vettore>& v2){
 
     vector<vettore> temp (v2.size());
@@ -95,7 +98,7 @@ vector<vettore> calcola_k(vector<vettore>& v1, vector<vettore>& v2){
 
 //ragiono sul numero dei passi, che di sicuro così mi fermo probabilmente un passo prima rispetto all'effettivo tempo finale
 
-
+//funzione che calcola l'evoluzione temporale con il metodo di runge-kutta4, stampa alcune posizioni su un file e restituisce i valori ad ogni tempo-----------------------
 vector<vector<vector<vettore>>> runge_kutta_4 ( vector<vettore>& r_iniziale, vector<vettore>& v_iniziale, double tmax, int N_passi, vettore (*f[])(vector<vettore>&)){
 
     double h = tmax/static_cast<double>(N_passi);
@@ -117,14 +120,14 @@ vector<vector<vector<vettore>>> runge_kutta_4 ( vector<vettore>& r_iniziale, vec
         r[0][i] = r_iniziale[i];
         v[0][i] = v_iniziale[i];
     }
-
+// le funzioni calcolano ad ogni tempo e per ogni corpo gli aggiornamenti intermedi e finali delle posizioni e delle velocità
     for (int i=0; i<N_passi-1; ++i){
 
         for (int j=0; j<n; ++j) {
             k_r[0][j] = (f[j])(v[i])*h;
             k_v[0][j] = (f[j+3])(r[i])*h;
         }
-        temp_r = calcola_k(r[i], k_r[0]);
+        temp_r = calcola_k(r[i], k_r[0]);// le variabili temp sono utilizzate per semplificare la chiamata delle funzioni che calcolano i valori delle k
         temp_v = calcola_k(v[i], k_r[0]);
 
         for (int j=0; j<n; ++j){
@@ -159,7 +162,7 @@ vector<vector<vector<vettore>>> runge_kutta_4 ( vector<vettore>& r_iniziale, vec
     //SISTEMO LE PRECISIONI
     fstream file;
     file.open("animazione.dat", ios_base::out);
-    for(int i=0; i<N_passi; i+=1000){
+    for(int i=0; i<N_passi; i+=10000){
         file<< setprecision(3) << static_cast<double>(i)*h << "\t";
         for (int j=0; j<n; ++j){
             file<< setprecision(3) << r[i][j].X() << " " << r[i][j].Y()<< " " << r[i][j].Z()<< "\t"; 
