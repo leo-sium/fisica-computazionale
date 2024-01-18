@@ -8,7 +8,8 @@
 #include <complex>
 
 using namespace std;
-
+ 
+ //funzione di ricorrenza
 complex<double> f(complex<double> z){
     complex<double> uno (1., 0.); //sinceramente non credo sia il modo migliore, ne cerco un'altro
     return z - (pow(z,3)-uno)/(3.*pow(z,2));
@@ -16,8 +17,9 @@ complex<double> f(complex<double> z){
 
 int main(int argc, char**argv){
 
-    int N = 50;
-    int K = 30;
+    int N = 1000; //risoluzione
+    int K = 30; //massimo di iterazioni
+    //zeri della funzione
     complex<double> zero1 (1, 0);
     complex<double> zero2 (polar(1., 2*M_PI/3));
     complex<double> zero3 (polar(1., -2*M_PI/3));
@@ -48,9 +50,7 @@ int main(int argc, char**argv){
         mod2 = abs(punto - zero2);
         mod3 = abs(punto - zero3);
 
-
         minimo = min(min(mod1,mod2), mod3);
-        
 
         if ( minimo== mod1) valore_zero[i] = 1;
         else if( minimo== mod2) valore_zero[i] = 2;

@@ -52,7 +52,7 @@ int main (){
 //condizioni iniziali del problema-------------------------------------------
     vettore r1(1, 0, 0);
     vettore r2(-1, 0, 0);
-    vettore r3(0, 0, 0);
+    vettore r3(0, 0, 1);
 
     vettore v1(0, 0.15, -0.15);
     vettore v2(0, -0.15, 0.15);
@@ -63,7 +63,7 @@ int main (){
     vector<vector<vettore>> r, v;
     double r12, r13, r23;
 
-    double tmax = 100; //il tempo finale di calcolo dell'equazione differenziale
+    double tmax = 10; //il tempo finale di calcolo dell'equazione differenziale
     int N_passi = 1000000; //numero di passi in cui suddivido l'intervallo di tempo
     double h = tmax/static_cast<double>(N_passi);
 

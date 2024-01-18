@@ -68,7 +68,7 @@ vector<double> Newton (vector<vector<double>>& intervalli, double precision, dou
     double x, delta;
     for (int i=0; i<intervalli.size(); ++i){
         x = intervalli[i][1];
-        while(abs(f(x))>precision){
+        while(abs(f(x))>abs(precision*f_der(x))){//ragiono sulla precisione
             delta = - f(x)/f_der(x);
             x = x + delta;
         }

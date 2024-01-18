@@ -29,7 +29,7 @@ int main (int argc, char**argv){
 
     double xmin = -2;
     double xmax = 2.;
-    double precisione1 = 0.01;
+    double precisione1 = 0.000001;
     double precisione2 = 0.000001;
 
     vector<vector<double>> intervalli = bracketing(xmin, xmax, g);
